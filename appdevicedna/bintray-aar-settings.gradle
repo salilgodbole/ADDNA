@@ -1,0 +1,2 @@
+include ':addna'
+project(':addna').projectDir = new File('appdevicedna')

@@ -1,0 +1,69 @@
+apply plugin: 'com.android.library'
+
+ext {
+    // Bintray credentials
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('bintray.auth').newDataInputStream())
+    bintray_userid = properties.getProperty("bintray.userid")
+    bintray_apikey = properties.getProperty("bintray.apikey")
+    bintray_gpgkey = properties.getProperty("bintray.gpgkey")
+
+    bintray_repo = 'maven'
+    package_name = 'com.salilgodbole'
+    group_id = 'com.salilgodbole'
+    artifact_id = project.name
+    artifact_version = '2.06.11'
+    all_licenses = ["Apache-2.0"] // mandatory
+    git_url = 'https://github.com/salilgodbole/ADDNA.git'
+    site_url = 'https://github.com/salilgodbole/ADDNA'
+
+    // pom.xml is required for users to download your aars using the command
+    // ie. compile 'group_id:artifact_id:artifact_version'
+    // eg. compile 'com.android.support:appcompat-v7:22.1.1'
+    // params below are for defining the additional params for the pom.xml
+    pom_library_desc = 'This SDK returns the generally required device and app parameters for advertising purpose.'
+    pom_license_name = 'The Apache Software License, Version 2.0'
+    pom_license_url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    pom_developer_id = 'salilgodbole'
+    pom_developer_name = 'salilgodbole'
+    pom_developer_email = 'salilgodbole@gmail.com'
+
+    // params for the android build
+    android_version_code = 1
+    android_version = artifact_version // reuse
+    android_build_sdk_version = 23
+    android_build_tools_version = "23.0.3"
+    android_build_minsdk_version = 9
+    android_build_targetsdk_version = 23
+}
+
+group = group_id
+version = artifact_version
+project.archivesBaseName = artifact_id
+
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+
+    defaultConfig {
+        minSdkVersion 9
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.2.1'
+}
+
+apply from: 'bintray-aar-publish.gradle'

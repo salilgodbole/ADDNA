@@ -1,0 +1,7 @@
+# ....................................................
+# Specify your BINTRAY LOGIN / API / GPG information
+# ....................................................
+
+bintray.userid=salilgodbole
+bintray.apikey=60f604ac5c91db58bbc42fcac8fada62a5356b1f
+bintray.gpgkey=sandalss
